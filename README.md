@@ -2,7 +2,10 @@
 This application implements a Spring Boot micro service using Rx-Java.
 All the external invocations are asynchronously done using RxJava components and programatic devices.
 This explains you how to bridge the gap between RxJava and Spring Boot while integrating them together.
-First check out the project into your local file system. Then move into the JavaRxDemo directory (cd ./JavaRxDemo)
+
+
+First check out the project into your local file system. 
+Then move into the JavaRxDemo directory (cd ./JavaRxDemo)
 Then exevute the mvn clean install command to build the project.
 Once it is successfully built, enter this command while being at the same directory.  mvn spring-boot:run
 The above command will run the micro service project after deploying it to an embedded servlet container.
