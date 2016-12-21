@@ -3,16 +3,16 @@ package com.example.domain.dto;
 import java.util.Map;
 
 public class CurrencyRatesDTO {
-	private String baseCurrency;
+	private String base;
 	private String date;
 	private Map<String, Double> rates;
 
-	public String getBaseCurrency() {
-		return baseCurrency;
+	public String getBase() {
+		return base;
 	}
 
-	public void setBaseCurrency(String baseCurrency) {
-		this.baseCurrency = baseCurrency;
+	public void setBase(String base) {
+		this.base = base;
 	}
 
 	public String getDate() {
