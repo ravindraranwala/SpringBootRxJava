@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.async.DeferredResult;
 
 import com.example.domain.dto.CurrencyRatesDTO;
-import com.example.domain.dto.service.CurrencyConverter;
-import com.example.domain.dto.service.CurrencyConverterService;
+import com.example.service.CurrencyConverter;
+import com.example.service.CurrencyConverterService;
 
 @Controller
 @RequestMapping("/api/currencyconverter")

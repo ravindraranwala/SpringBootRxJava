@@ -1,4 +1,4 @@
-package com.example.domain.dto.service;
+package com.example.service;
 
 import java.util.Set;
 
