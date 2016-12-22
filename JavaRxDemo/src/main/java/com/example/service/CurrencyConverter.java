@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.example.domain.dto.CurrencyRatesDTO;
-import com.example.domain.dto.RestUtil;
+import com.example.util.RestUtil;
 
 import rx.Observable;
 
