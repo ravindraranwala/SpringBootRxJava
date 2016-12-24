@@ -22,4 +22,4 @@ You should get the following as the response.
     "USD": 1.0364
   }
 }
-Alternatively you can just hit the following url in your browser address bar and see the same result. http://localhost:8080/api/currencyconverter/rates?symbol=USD,CGBP
+Alternatively you can just hit the following url in your browser address bar and see the same result. http://localhost:8080/api/currencyconverter/rates?symbol=USD,GBP
