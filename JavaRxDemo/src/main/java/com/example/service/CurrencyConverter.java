@@ -32,7 +32,7 @@ public class CurrencyConverter implements CurrencyConverterService {
 	private Observable<CurrencyRatesDTO> getCurrencyRatesObservable(Set<String> currencies) {
 		return Observable.<CurrencyRatesDTO> create(sub -> {
 			CurrencyRatesDTO currencyRatesDTO = restTemplate.getForEntity(
-					CURRENCY_SERVICE_API
+					CURRENCY_SERVICE_API + RestUtil.QUERY_PARAM_START_SYMBOL
 							+ RestUtil.getQueryParamStringForMultiValuedAttribute(SYMBOLS, currencies),
 					CurrencyRatesDTO.class).getBody();
 			sub.onNext(currencyRatesDTO);
