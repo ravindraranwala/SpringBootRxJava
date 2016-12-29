@@ -20,7 +20,7 @@ public class RestUtil {
 			final List<String> values) {
 		StringJoiner queryParam = new StringJoiner(DELIMITER);
 		IntStream.range(0, Math.min(paramNames.size(), values.size()))
-				.mapToObj(i -> queryParam.add(paramNames.get(i) + SEPARATOR + values.get(i)));
+				.mapToObj(i -> paramNames.get(i) + SEPARATOR + values.get(i)).forEach(val -> queryParam.add(val));
 		return queryParam.toString();
 	}
 }
