@@ -21,6 +21,10 @@ public class BaseStudentDTO {
 	@NotEmpty
 	private String stream;
 
+	private BaseStudentDTO() {
+		super();
+	}
+
 	public BaseStudentDTO(String name, int age, double gpa, String stream) {
 		super();
 		this.name = name;
