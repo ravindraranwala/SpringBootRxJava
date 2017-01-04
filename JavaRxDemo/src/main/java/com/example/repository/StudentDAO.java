@@ -50,6 +50,6 @@ public class StudentDAO implements StudentRepository {
 	public Observable<StudentDTO> findByName(String name) {
 		log.debug("Fetching the student with name: " + name);
 		return collection.find(eq(DocumentToStudentTransformer.NAME, name)).toObservable()
-				.map(sub -> new DocumentToStudentTransformer().transform(sub));
+				.map(doc -> new DocumentToStudentTransformer().transform(doc));
 	}
 }
