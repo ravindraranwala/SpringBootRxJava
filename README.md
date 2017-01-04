@@ -56,15 +56,15 @@ HTTP_SC: 200
 
 
 Then to fetch a student given the name send the following GET request.
-http://localhost:8080/api/students?name=Kristina
+http://localhost:8080/api/students?name=Christina
 
 You may get the response as below.
 {
-  "name": "Kristina",
-  "age": 27,
-  "gpa": 3.6,
+  "name": "Christina",
+  "age": 28,
+  "gpa": 3.7,
   "stream": "Arts",
-  "id": "586c9338f7df1a1d645ef8fa"
+  "id": "586c98eff7df1a16e849c398"
 }
 
 HTTP_SC: 200
