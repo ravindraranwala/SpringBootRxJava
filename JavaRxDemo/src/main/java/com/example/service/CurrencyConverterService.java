@@ -16,6 +16,6 @@ public interface CurrencyConverterService {
 	 * @return Set of currencies with their rate against the base currency which
 	 *         is Euro.
 	 */
-	public Observable<CurrencyRatesDTO> getCurrencyRates(Set<String> currencies);
+	Observable<CurrencyRatesDTO> getCurrencyRates(Set<String> currencies);
 
 }
