@@ -29,7 +29,7 @@ public class OrderProcessor implements OrderService {
 	@Override
 	public Observable<OrderDetailsDTO> getOrderDetails() {
 		log.debug("Retrieving the Order Details.");
-		return getProductDetails().zipWith(getShippingInformation(),
+		return Observable.zip(getProductDetails(), getShippingInformation(),
 				(productInfo, shippingInfo) -> new ProductDetailsDTOTOOrderDetailsDTOTransformer(shippingInfo)
 						.transform(productInfo));
 	}
