@@ -16,7 +16,7 @@ You will be shown with all the REST methods exposed by the service with their de
 
 There are two different usecases implemented by this application.
 
-# Usecase1: Calling an external Currency Conversion API asynchronously to get the currency rates for given set of currencies.
+# Usecase1: Calling an external Currency Conversion API asynchronously using RxJava to get the currency rates for given set of currencies.
 
 This application gives you currency rates for the currencies you enter compared with a sensible base currency, which is Euro in this case.
 
@@ -36,7 +36,7 @@ Alternatively you can just hit the following url in your browser address bar and
 
 
 
-# Usecase 2: Create a Student entity and retrieve a Student entity given the name.
+# Usecase 2: Calling an exterenal NoSQL database asynchronously from within a Spring Boot microservice using RxJava.
 This demonstrates calling a MongoDB database using RxJava asynchronously within the SpringBoot microservice.
 I assume that you have a MongoDB instance up and running in your local machine on default port. For some reason if you have a
 different configuration in your MongoDB instance to which you are planning to connect change the following peoperties in the application.properties
