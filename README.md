@@ -14,7 +14,7 @@ The above command will run the micro service project after deploying it to an em
 Now to get the swagger UI hit this url in your address bar. http://localhost:8080/swagger-ui.html#!/
 You will be shown with all the REST methods exposed by the service with their definitions. 
 
-There are two different usecases implemented by this application.
+There are three main usecases pertaining to RxJava landscape is implemented by this application.
 
 # Usecase1: Calling an external Currency Conversion API asynchronously using RxJava to get the currency rates for given set of currencies.
 
