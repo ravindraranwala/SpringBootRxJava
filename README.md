@@ -14,9 +14,9 @@ The above command will run the micro service project after deploying it to an em
 Now to get the swagger UI hit this url in your address bar. http://localhost:8080/swagger-ui.html#!/
 You will be shown with all the REST methods exposed by the service with their definitions. 
 
-There are two different usecases implemented by this application.
+There are three main usecases pertaining to RxJava landscape is implemented by this application.
 
-# Usecase1: Calling an external Currency Conversion API asynchronously to get the currency rates for given set of currencies.
+# Usecase1: Calling an external Currency Conversion API asynchronously using RxJava to get the currency rates for given set of currencies.
 
 This application gives you currency rates for the currencies you enter compared with a sensible base currency, which is Euro in this case.
 
@@ -36,7 +36,7 @@ Alternatively you can just hit the following url in your browser address bar and
 
 
 
-# Usecase 2: Create a Student entity and retrieve a Student entity given the name.
+# Usecase 2: Calling an exterenal NoSQL database asynchronously from within a Spring Boot microservice using RxJava.
 This demonstrates calling a MongoDB database using RxJava asynchronously within the SpringBoot microservice.
 I assume that you have a MongoDB instance up and running in your local machine on default port. For some reason if you have a
 different configuration in your MongoDB instance to which you are planning to connect change the following peoperties in the application.properties
@@ -73,3 +73,42 @@ You may get the response as below.
 }
 
 HTTP_SC: 200
+
+
+# Usecase 3: Combine the emissions of multiple Observables together using RxJava Zip operator.
+This demonstrates the use of a powerful and advanced RxJava operataor called Zip. 
+The use case we are going to use to demonstrate the RxJava Zip operator is an eCommerce system such as Amazon where people are purchasing things by placing orders online and getting them delivered at their door steps.
+
+Suppose we have a simple REST API which returns us product information associated with our order. There is another REST API which computes shipping cost and returns all the necessary shipping information associated with this order. Our micro service is going to call both these services asynchronously and merge those information and return Order details to the end user. The product API [4] returns the price of the item while the shipping API [5] returns the shipping cost associated with it. Finally we sum them up to calculate the total price of the item and return it with all the other information about this order back to the user. 
+
+The response of the Product API is given below.
+GET: http://demo9514811.mockable.io/products/northfacehoodie
+{
+ "name": "North Face Hoodie",
+ "unitPrice": 100,
+ "currency": "USD",
+ "soldBy": "Amazon"
+}
+
+The response of the Shipping API looks something like this.
+GET: http://demo9514811.mockable.io/shipping/northfacehoodie
+{
+ "courierService": "FedEx",
+ "cost": 20,
+ "currency": "USD",
+ "address": "8716, Vineyard Way #723 Germantown, TN 38138"
+}
+
+When you send a get request to our Order API which we are planning to expose to the clients, you may get the following response.
+GET: http://localhost:8080/api/order
+{
+  "itemName": "North Face Hoodie",
+  "totalPrice": 120,
+  "unitPrice": 100,
+  "currency": "USD",
+  "soldBy": "Amazon",
+  "courierService": "FedEx",
+  "shippingAddress": "8716, Vineyard Way #723 Germantown, TN 38138",
+  "shippingCost": 20
+}
+
