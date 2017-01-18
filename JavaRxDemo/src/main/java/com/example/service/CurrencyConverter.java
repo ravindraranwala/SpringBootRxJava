@@ -37,8 +37,8 @@ public class CurrencyConverter implements CurrencyConverterService {
 					CurrencyRatesDTO.class).getBody();
 			sub.onNext(currencyRatesDTO);
 			sub.onCompleted();
-			log.debug("Currency rates were retrieved successfully.");
-		});
+		}).doOnNext(c -> log.debug("Currency rates were retrieved successfully."))
+				.doOnError(e -> log.error("An ERROR occurred while retrieving the currency rates.", e));
 	}
 
 }

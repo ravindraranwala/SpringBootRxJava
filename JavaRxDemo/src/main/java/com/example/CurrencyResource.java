@@ -30,13 +30,10 @@ public class CurrencyResource {
 	public DeferredResult<ResponseEntity<CurrencyRatesDTO>> getCurrencyRates(
 			@RequestParam("symbol") Set<String> currencyRates) {
 		DeferredResult<ResponseEntity<CurrencyRatesDTO>> deferredResult = new DeferredResult<ResponseEntity<CurrencyRatesDTO>>();
-		currencyConverterService.getCurrencyRates(currencyRates).subscribe(sub -> {
-			log.debug("Currency rates were retrieved successfully.");
-			deferredResult.setResult(new ResponseEntity<CurrencyRatesDTO>(sub, HttpStatus.OK));
-		}, e -> {
-			log.error("Error occurred while computing currency rates.");
-			deferredResult.setErrorResult(e);
-		});
+		log.debug("Retrieving currency rates.");
+		currencyConverterService.getCurrencyRates(currencyRates).subscribe(
+				sub -> deferredResult.setResult(new ResponseEntity<CurrencyRatesDTO>(sub, HttpStatus.OK)),
+				e -> deferredResult.setErrorResult(e));
 		return deferredResult;
 	}
 }

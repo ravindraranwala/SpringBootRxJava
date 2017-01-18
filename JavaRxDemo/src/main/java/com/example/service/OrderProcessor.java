@@ -40,8 +40,8 @@ public class OrderProcessor implements OrderService {
 					.getForEntity(ORDER_API + PRODUCT_URL, ProductDetailsDTO.class).getBody();
 			sub.onNext(productDetailsDTO);
 			sub.onCompleted();
-			log.debug("Product details were received successfully.");
-		});
+		}).doOnNext(p -> log.debug("Product details were received successfully."))
+				.doOnError(e -> log.error("An ERROR occurred while fetching the Product details.", e));
 	}
 
 	private Observable<ShippingDetailsDTO> getShippingInformation() {
@@ -50,7 +50,7 @@ public class OrderProcessor implements OrderService {
 					.getForEntity(ORDER_API + SHIPPING_URL, ShippingDetailsDTO.class).getBody();
 			sub.onNext(shippingDetailsDTO);
 			sub.onCompleted();
-			log.debug("Shipping details were received successfully.");
-		});
+		}).doOnNext(s -> log.debug("Shipping information was received successfully."))
+				.doOnError(e -> log.error("An ERROR occurred while fetching Shipping Information", e));
 	}
 }

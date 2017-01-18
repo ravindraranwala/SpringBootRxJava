@@ -36,8 +36,9 @@ public class StudentDAO implements StudentRepository {
 	}
 
 	public Observable<Success> createStudent(BaseStudentDTO student) {
-		log.debug("Inserting a new Student ...");
-		return collection.insertOne(createStudentDocument(student));
+		return collection.insertOne(createStudentDocument(student))
+				.doOnNext(s -> log.debug("Student was created successfully."))
+				.doOnError(e -> log.error("An ERROR occurred while creating a new Student", e));
 	}
 
 	private Document createStudentDocument(BaseStudentDTO student) {
@@ -50,6 +51,8 @@ public class StudentDAO implements StudentRepository {
 	public Observable<StudentDTO> findByName(String name) {
 		log.debug("Fetching the student with name: " + name);
 		return collection.find(eq(DocumentToStudentTransformer.NAME, name)).toObservable()
-				.map(doc -> new DocumentToStudentTransformer().transform(doc));
+				.map(doc -> new DocumentToStudentTransformer().transform(doc))
+				.doOnNext(s -> log.debug("Student with the given name was retrieved."))
+				.doOnError(e -> log.error("An ERROR occurred while fetching the student", e));
 	}
 }

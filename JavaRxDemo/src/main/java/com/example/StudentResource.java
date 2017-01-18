@@ -1,5 +1,7 @@
 package com.example;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -19,10 +21,13 @@ import com.example.repository.StudentRepository;
 public class StudentResource {
 	@Autowired
 	private StudentRepository studentRepository;
+	
+	private static final Logger log = LoggerFactory.getLogger(StudentResource.class);
 
 	@RequestMapping(value = "", method = RequestMethod.POST, produces = { MediaType.APPLICATION_JSON_UTF8_VALUE })
 	public DeferredResult<ResponseEntity<?>> createStudent(@RequestBody BaseStudentDTO student) {
 		DeferredResult<ResponseEntity<?>> deferredResult = new DeferredResult<ResponseEntity<?>>();
+		log.debug("Creating a new Student.");
 		studentRepository.createStudent(student).subscribe(
 				sub -> deferredResult.setResult(new ResponseEntity<>(sub, HttpStatus.OK)),
 				e -> deferredResult.setErrorResult(e));
@@ -33,6 +38,7 @@ public class StudentResource {
 	@RequestMapping(value = "", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_UTF8_VALUE })
 	public DeferredResult<ResponseEntity<BaseStudentDTO>> getStudentByName(@RequestParam String name) {
 		DeferredResult<ResponseEntity<BaseStudentDTO>> deferredResult = new DeferredResult<ResponseEntity<BaseStudentDTO>>();
+		log.debug("Fetching a new student with the Name: " + name);
 		studentRepository.findByName(name).subscribe(sub -> deferredResult.setResult(ResponseEntity.ok(sub)),
 				e -> deferredResult.setErrorResult(e));
 		return deferredResult;
