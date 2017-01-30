@@ -6,10 +6,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.example.domain.dto.CurrencyRatesDTO;
 import com.example.service.CurrencyConverter;
@@ -17,7 +17,7 @@ import com.example.service.CurrencyConverterService;
 
 import rx.Observable;
 
-@Controller
+@RestController
 @RequestMapping("/api/currencyconverter")
 public class CurrencyResource {
 	private static final Logger log = LoggerFactory.getLogger(CurrencyConverter.class);
