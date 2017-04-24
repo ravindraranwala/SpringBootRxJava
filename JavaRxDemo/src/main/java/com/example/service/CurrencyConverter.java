@@ -7,9 +7,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import com.example.domain.dto.CurrencyRatesDTO;
-import com.example.util.RestUtil;
 
 import rx.Observable;
 
@@ -31,10 +31,10 @@ public class CurrencyConverter implements CurrencyConverterService {
 
 	private Observable<CurrencyRatesDTO> getCurrencyRatesObservable(Set<String> currencies) {
 		return Observable.<CurrencyRatesDTO> create(sub -> {
-			CurrencyRatesDTO currencyRatesDTO = restTemplate.getForEntity(
-					CURRENCY_SERVICE_API + RestUtil.QUERY_PARAM_START_SYMBOL
-							+ RestUtil.getQueryParamStringForMultiValuedAttribute(SYMBOLS, currencies),
-					CurrencyRatesDTO.class).getBody();
+			CurrencyRatesDTO currencyRatesDTO = restTemplate
+					.getForEntity(UriComponentsBuilder.fromUriString(CURRENCY_SERVICE_API)
+							.queryParam(SYMBOLS, currencies).toUriString(), CurrencyRatesDTO.class)
+					.getBody();
 			sub.onNext(currencyRatesDTO);
 			sub.onCompleted();
 		}).doOnNext(c -> log.debug("Currency rates were retrieved successfully."))
