@@ -2,7 +2,6 @@ package com.example;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,10 +19,14 @@ import rx.Observable;
 @RestController
 @RequestMapping("/api/students")
 public class StudentResource {
-	@Autowired
-	private StudentRepository studentRepository;
-	
 	private static final Logger log = LoggerFactory.getLogger(StudentResource.class);
+
+	private final StudentRepository studentRepository;
+
+	public StudentResource(StudentRepository studentRepository) {
+		super();
+		this.studentRepository = studentRepository;
+	}
 
 	@RequestMapping(value = "", method = RequestMethod.POST, produces = { MediaType.APPLICATION_JSON_UTF8_VALUE })
 	public Observable<Success> createStudent(@RequestBody BaseStudentDTO student) {

@@ -24,7 +24,12 @@ public class OrderProcessor implements OrderService {
 
 	private static final Logger log = LoggerFactory.getLogger(OrderProcessor.class);
 
-	private RestTemplate restTemplate = new RestTemplate();
+	private final RestTemplate restTemplate;
+
+	public OrderProcessor(RestTemplate restTemplate) {
+		super();
+		this.restTemplate = restTemplate;
+	}
 
 	@Override
 	public Observable<OrderDetailsDTO> getOrderDetails() {
@@ -35,7 +40,7 @@ public class OrderProcessor implements OrderService {
 	}
 
 	private Observable<ProductDetailsDTO> getProductDetails() {
-		return Observable.<ProductDetailsDTO> create(sub -> {
+		return Observable.<ProductDetailsDTO>create(sub -> {
 			ProductDetailsDTO productDetailsDTO = restTemplate
 					.getForEntity(ORDER_API + PRODUCT_URL, ProductDetailsDTO.class).getBody();
 			sub.onNext(productDetailsDTO);
@@ -45,7 +50,7 @@ public class OrderProcessor implements OrderService {
 	}
 
 	private Observable<ShippingDetailsDTO> getShippingInformation() {
-		return Observable.<ShippingDetailsDTO> create(sub -> {
+		return Observable.<ShippingDetailsDTO>create(sub -> {
 			ShippingDetailsDTO shippingDetailsDTO = restTemplate
 					.getForEntity(ORDER_API + SHIPPING_URL, ShippingDetailsDTO.class).getBody();
 			sub.onNext(shippingDetailsDTO);

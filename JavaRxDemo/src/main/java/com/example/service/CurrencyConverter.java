@@ -22,7 +22,12 @@ public class CurrencyConverter implements CurrencyConverterService {
 
 	private static final Logger log = LoggerFactory.getLogger(CurrencyConverter.class);
 
-	private RestTemplate restTemplate = new RestTemplate();
+	private final RestTemplate restTemplate;
+
+	public CurrencyConverter(RestTemplate restTemplate) {
+		super();
+		this.restTemplate = restTemplate;
+	}
 
 	@Override
 	public Observable<CurrencyRatesDTO> getCurrencyRates(Set<String> currencies) {
@@ -30,7 +35,7 @@ public class CurrencyConverter implements CurrencyConverterService {
 	}
 
 	private Observable<CurrencyRatesDTO> getCurrencyRatesObservable(Set<String> currencies) {
-		return Observable.<CurrencyRatesDTO> create(sub -> {
+		return Observable.<CurrencyRatesDTO>create(sub -> {
 			CurrencyRatesDTO currencyRatesDTO = restTemplate
 					.getForEntity(UriComponentsBuilder.fromUriString(CURRENCY_SERVICE_API)
 							.queryParam(SYMBOLS, currencies.toArray()).toUriString(), CurrencyRatesDTO.class)
