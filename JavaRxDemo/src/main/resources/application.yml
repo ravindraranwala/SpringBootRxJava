@@ -3,8 +3,6 @@ spring:
         mongodb: 
             uri: mongodb://localhost:27017
             database: questionservice
-    application:
-        name: currency-service
         
 swagger:
     title: Currency Service
