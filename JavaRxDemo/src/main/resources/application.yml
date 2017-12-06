@@ -1,0 +1,22 @@
+spring:
+    data:
+        mongodb: 
+            uri: mongodb://localhost:27017
+            database: questionservice
+    application:
+        name: currency-service
+        
+swagger:
+    title: Currency Service
+    description: Currency Converter Service
+    version: 1.0
+    
+server:
+    port: 8080
+    
+services: 
+    currency: 
+        uri: http://api.fixer.io/latest
+    order:
+        uri: http://demo9514811.mockable.io
+
