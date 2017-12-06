@@ -17,4 +17,12 @@ services:
         uri: http://api.fixer.io/latest
     order:
         uri: http://demo9514811.mockable.io
+        
+
+security:
+    authentication: 
+        jwt:
+            secret: 46c10c0e9c6c0646df3d37340cb45e7eafd3ec6c
+            # Token is valid 24 hours
+            tokenValidityInSeconds: 86400
 
