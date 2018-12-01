@@ -5,11 +5,7 @@ package com.example.domain.dto;
  *
  */
 public class StudentDTO extends BaseStudentDTO {
-	private String id;
-
-	public StudentDTO(String name, int age, double gpa, String stream) {
-		super(name, age, gpa, stream);
-	}
+	private final String id;
 
 	public StudentDTO(String name, int age, double gpa, String stream, String id) {
 		super(name, age, gpa, stream);
@@ -19,9 +15,4 @@ public class StudentDTO extends BaseStudentDTO {
 	public String getId() {
 		return id;
 	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
 }

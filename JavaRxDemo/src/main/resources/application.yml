@@ -14,7 +14,7 @@ server:
     
 services: 
     currency: 
-        uri: http://api.fixer.io/latest
+        uri: https://api.exchangeratesapi.io/latest
     order:
         uri: http://demo9514811.mockable.io
 

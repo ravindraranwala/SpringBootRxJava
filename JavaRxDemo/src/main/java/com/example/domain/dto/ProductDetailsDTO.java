@@ -1,5 +1,8 @@
 package com.example.domain.dto;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * This domain class represents a Product entity in our eCommerce system. It
  * encapsulates all the basic attributes relevant to a particular Product. An
@@ -7,41 +10,35 @@ package com.example.domain.dto;
  *
  */
 public class ProductDetailsDTO {
-	private String name;
-	private double unitPrice;
-	private String currency;
-	private String soldBy;
+	private final String name;
+	private final double unitPrice;
+	private final String currency;
+	private final String soldBy;
+
+	@JsonCreator
+	public ProductDetailsDTO(@JsonProperty("name") String name, @JsonProperty("unitPrice") double unitPrice,
+			@JsonProperty("currency") String currency, @JsonProperty("soldBy") String soldBy) {
+		super();
+		this.name = name;
+		this.unitPrice = unitPrice;
+		this.currency = currency;
+		this.soldBy = soldBy;
+	}
 
 	public String getName() {
 		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public double getUnitPrice() {
 		return unitPrice;
 	}
 
-	public void setUnitPrice(double unitPrice) {
-		this.unitPrice = unitPrice;
-	}
-
 	public String getCurrency() {
 		return currency;
 	}
 
-	public void setCurrency(String currency) {
-		this.currency = currency;
-	}
-
 	public String getSoldBy() {
 		return soldBy;
-	}
-
-	public void setSoldBy(String soldBy) {
-		this.soldBy = soldBy;
 	}
 
 }

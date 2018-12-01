@@ -9,7 +9,6 @@ import org.springframework.web.client.RestTemplate;
 import com.example.domain.dto.OrderDetailsDTO;
 import com.example.domain.dto.ProductDetailsDTO;
 import com.example.domain.dto.ShippingDetailsDTO;
-import com.example.transformer.ProductDetailsDTOTOOrderDetailsDTOTransformer;
 
 import rx.Observable;
 
@@ -35,8 +34,7 @@ public class OrderProcessor implements OrderService {
 	public Observable<OrderDetailsDTO> getOrderDetails() {
 		log.debug("Retrieving the Order Details.");
 		return Observable.zip(getProductDetails(), getShippingInformation(),
-				(productInfo, shippingInfo) -> new ProductDetailsDTOTOOrderDetailsDTOTransformer(shippingInfo)
-						.transform(productInfo));
+				(productInfo, shippingInfo) -> new OrderDetailsDTO(productInfo, shippingInfo));
 	}
 
 	private Observable<ProductDetailsDTO> getProductDetails() {

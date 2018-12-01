@@ -1,6 +1,6 @@
 package com.example.service;
 
-import java.util.Set;
+import java.util.Collection;
 
 import com.example.domain.dto.CurrencyRatesDTO;
 
@@ -16,6 +16,6 @@ public interface CurrencyConverterService {
 	 * @return Set of currencies with their rate against the base currency which
 	 *         is Euro.
 	 */
-	Observable<CurrencyRatesDTO> getCurrencyRates(Set<String> currencies);
+	Observable<CurrencyRatesDTO> getCurrencyRates(Collection<String> currencies);
 
 }

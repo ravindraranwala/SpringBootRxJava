@@ -1,26 +1,29 @@
 package com.example.domain.dto;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * This domain class gives an abstract view of the Order to the end user
  * including products associated with it, their prices and shipping details.
  *
  */
 public class OrderDetailsDTO {
-	private String itemName;
-	private double totalPrice;
-	private double unitPrice;
-	private String currency;
-	private String soldBy;
-	private String courierService;
-	private String shippingAddress;
-	private double shippingCost;
+	private final String itemName;
+	private final double totalPrice;
+	private final double unitPrice;
+	private final String currency;
+	private final String soldBy;
+	private final String courierService;
+	private final String shippingAddress;
+	private final double shippingCost;
 
-	public OrderDetailsDTO() {
-		super();
-	}
-
-	public OrderDetailsDTO(String itemName, double totalPrice, double unitPrice, String currency, String soldBy,
-			String courierService, String shippingAddress, double shippingCost) {
+	@JsonCreator
+	public OrderDetailsDTO(@JsonProperty("itemName") String itemName, @JsonProperty("totalPrice") double totalPrice,
+			@JsonProperty("unitPrice") double unitPrice, @JsonProperty("currency") String currency,
+			@JsonProperty("soldBy") String soldBy, @JsonProperty("courierService") String courierService,
+			@JsonProperty("shippingAddress") String shippingAddress,
+			@JsonProperty("shippingCost") double shippingCost) {
 		super();
 		this.itemName = itemName;
 		this.totalPrice = totalPrice;
@@ -30,70 +33,48 @@ public class OrderDetailsDTO {
 		this.courierService = courierService;
 		this.shippingAddress = shippingAddress;
 		this.shippingCost = shippingCost;
+	}
+
+	public OrderDetailsDTO(ProductDetailsDTO productInfo, ShippingDetailsDTO shippingInfo) {
+		this.itemName = productInfo.getName();
+		this.totalPrice = productInfo.getUnitPrice() + shippingInfo.getCost();
+		this.unitPrice = productInfo.getUnitPrice();
+		this.currency = productInfo.getCurrency();
+		this.soldBy = productInfo.getSoldBy();
+		this.courierService = shippingInfo.getCourierService();
+		this.shippingAddress = shippingInfo.getAddress();
+		this.shippingCost = shippingInfo.getCost();
 	}
 
 	public String getItemName() {
 		return itemName;
 	}
 
-	public void setItemName(String itemName) {
-		this.itemName = itemName;
-	}
-
 	public double getTotalPrice() {
 		return totalPrice;
-	}
-
-	public void setTotalPrice(double totalPrice) {
-		this.totalPrice = totalPrice;
 	}
 
 	public double getUnitPrice() {
 		return unitPrice;
 	}
 
-	public void setUnitPrice(double unitPrice) {
-		this.unitPrice = unitPrice;
-	}
-
 	public String getCurrency() {
 		return currency;
-	}
-
-	public void setCurrency(String currency) {
-		this.currency = currency;
 	}
 
 	public String getSoldBy() {
 		return soldBy;
 	}
 
-	public void setSoldBy(String soldBy) {
-		this.soldBy = soldBy;
-	}
-
 	public String getCourierService() {
 		return courierService;
-	}
-
-	public void setCourierService(String courierService) {
-		this.courierService = courierService;
 	}
 
 	public String getShippingAddress() {
 		return shippingAddress;
 	}
 
-	public void setShippingAddress(String shippingAddress) {
-		this.shippingAddress = shippingAddress;
-	}
-
 	public double getShippingCost() {
 		return shippingCost;
 	}
-
-	public void setShippingCost(double shippingCost) {
-		this.shippingCost = shippingCost;
-	}
-
 }

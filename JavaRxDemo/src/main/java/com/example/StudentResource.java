@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.domain.dto.BaseStudentDTO;
 import com.example.domain.dto.StudentDTO;
 import com.example.repository.StudentRepository;
-import com.mongodb.rx.client.Success;
 
 import rx.Observable;
 
@@ -29,7 +28,7 @@ public class StudentResource {
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.POST, produces = { MediaType.APPLICATION_JSON_UTF8_VALUE })
-	public Observable<Success> createStudent(@RequestBody BaseStudentDTO student) {
+	public Observable<?> createStudent(@RequestBody BaseStudentDTO student) {
 		log.debug("Creating a new Student.");
 		return studentRepository.createStudent(student);
 	}

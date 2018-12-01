@@ -2,7 +2,6 @@ package com.example.repository;
 
 import com.example.domain.dto.BaseStudentDTO;
 import com.example.domain.dto.StudentDTO;
-import com.mongodb.rx.client.Success;
 
 import rx.Observable;
 
@@ -18,7 +17,7 @@ public interface StudentRepository {
 	 *            new {@link Student} instance to be created.
 	 * @return The status of the operation.
 	 */
-	Observable<Success> createStudent(BaseStudentDTO student);
+	Observable<?> createStudent(BaseStudentDTO student);
 
 	/**
 	 * Fetches a Student with the given name.

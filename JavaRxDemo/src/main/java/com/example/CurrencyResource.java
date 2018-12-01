@@ -1,6 +1,6 @@
 package com.example;
 
-import java.util.Set;
+import java.util.Collection;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,8 +29,9 @@ public class CurrencyResource {
 	}
 
 	@RequestMapping(value = "/rates", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_UTF8_VALUE })
-	public Observable<CurrencyRatesDTO> getCurrencyRates(@RequestParam("symbol") Set<String> currencyRates) {
+	public Observable<CurrencyRatesDTO> getCurrencyRates(@RequestParam("symbol") Collection<String> currencyRates) {
 		log.debug("Retrieving currency rates.");
+		log.info("Running in Thread: " + Thread.currentThread().getName());
 		return currencyConverterService.getCurrencyRates(currencyRates);
 	}
 }
