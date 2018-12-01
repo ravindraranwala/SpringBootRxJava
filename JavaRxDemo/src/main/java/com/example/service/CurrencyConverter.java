@@ -34,7 +34,6 @@ public class CurrencyConverter implements CurrencyConverterService {
 
 	@Override
 	public Observable<CurrencyRatesDTO> getCurrencyRates(Collection<String> currencies) {
-		log.info("Running in thread: " + Thread.currentThread().getName());
 		return getCurrencyRatesFromEp(new HashSet<>(currencies)).subscribeOn(Schedulers.io());
 	}
 
@@ -46,7 +45,7 @@ public class CurrencyConverter implements CurrencyConverterService {
 					.getBody();
 			sub.onNext(currencyRatesDTO);
 			sub.onCompleted();
-		}).doOnNext(c -> log.info("Currency rates were retrieved successfully." + Thread.currentThread().getName()))
+		}).doOnNext(c -> log.info("Currency rates were retrieved successfully."))
 				.doOnError(e -> log.error("An ERROR occurred while retrieving the currency rates.", e));
 	}
 

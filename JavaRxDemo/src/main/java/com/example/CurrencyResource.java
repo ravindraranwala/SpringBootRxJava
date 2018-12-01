@@ -31,7 +31,6 @@ public class CurrencyResource {
 	@RequestMapping(value = "/rates", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_UTF8_VALUE })
 	public Observable<CurrencyRatesDTO> getCurrencyRates(@RequestParam("symbol") Collection<String> currencyRates) {
 		log.debug("Retrieving currency rates.");
-		log.info("Running in Thread: " + Thread.currentThread().getName());
 		return currencyConverterService.getCurrencyRates(currencyRates);
 	}
 }
