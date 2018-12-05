@@ -14,7 +14,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.example.domain.dto.CurrencyRatesDTO;
 
 import rx.Observable;
-import rx.schedulers.Schedulers;
 
 @Service
 public class CurrencyConverter implements CurrencyConverterService {
@@ -34,7 +33,7 @@ public class CurrencyConverter implements CurrencyConverterService {
 
 	@Override
 	public Observable<CurrencyRatesDTO> getCurrencyRates(Collection<String> currencies) {
-		return getCurrencyRatesFromEp(new HashSet<>(currencies)).subscribeOn(Schedulers.io());
+		return getCurrencyRatesFromEp(new HashSet<>(currencies));
 	}
 
 	private Observable<CurrencyRatesDTO> getCurrencyRatesFromEp(Set<String> currencies) {
@@ -48,5 +47,4 @@ public class CurrencyConverter implements CurrencyConverterService {
 		}).doOnNext(c -> log.info("Currency rates were retrieved successfully."))
 				.doOnError(e -> log.error("An ERROR occurred while retrieving the currency rates.", e));
 	}
-
 }

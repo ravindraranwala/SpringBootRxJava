@@ -15,6 +15,8 @@ server:
 services: 
     currency: 
         uri: https://api.exchangeratesapi.io/latest
-    order:
-        uri: http://demo9514811.mockable.io
+    product:
+        uri: http://www.mocky.io/v2/5c050d273300005100d01f1d
+    shipping:
+        uri: http://www.mocky.io/v2/5c050d9b3300002900d01f21
 

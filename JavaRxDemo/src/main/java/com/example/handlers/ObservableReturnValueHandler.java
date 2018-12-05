@@ -34,7 +34,7 @@ public class ObservableReturnValueHandler implements AsyncHandlerMethodReturnVal
                 .startDeferredResultProcessing(new ObservableAdapter<>(observable), mavContainer);
     }
 
-    public class ObservableAdapter<T> extends DeferredResult<T> {
+    private static class ObservableAdapter<T> extends DeferredResult<T> {
         public ObservableAdapter(Observable<T> observable) {
             observable.subscribe(this::setResult, this::setErrorResult);
         }
